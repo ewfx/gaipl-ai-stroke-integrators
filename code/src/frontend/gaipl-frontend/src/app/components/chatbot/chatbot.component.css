@@ -1,0 +1,28 @@
+.chat-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+  }
+  
+  .chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+  
+  .user {
+    text-align: right;
+    color: blue;
+  }
+  
+  .ai {
+    text-align: left;
+    color: green;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
