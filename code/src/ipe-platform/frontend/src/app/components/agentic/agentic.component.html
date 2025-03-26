@@ -1,0 +1,57 @@
+<div class="agentic-container">
+  <h2>Agentic Capabilities</h2>
+
+  <!-- Health Check Section -->
+  <div class="section">
+    <h3>Health Check</h3>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="serviceId" placeholder="Enter Service ID">
+      <button (click)="launchHealthCheck()" [disabled]="loading">Launch Health Check</button>
+    </div>
+  </div>
+
+  <!-- RCA Section -->
+  <div class="section">
+    <h3>Root Cause Analysis</h3>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="incidentId" placeholder="Enter Incident ID">
+      <button (click)="generateRCA()" [disabled]="loading">Generate RCA</button>
+    </div>
+  </div>
+
+  <!-- Automation Section -->
+  <div class="section">
+    <h3>Automation</h3>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="scriptName" placeholder="Enter Script Name">
+      <textarea [(ngModel)]="automationParams" placeholder="Enter JSON parameters"></textarea>
+      <button (click)="executeAutomation()" [disabled]="loading">Execute Automation</button>
+    </div>
+  </div>
+
+  <!-- Related Incidents Section -->
+  <div class="section">
+    <h3>Related Incidents</h3>
+    <div class="input-group">
+      <input type="text" [(ngModel)]="incidentId" placeholder="Enter Incident ID">
+      <button (click)="getRelatedIncidents()" [disabled]="loading">Get Related Incidents</button>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-section" *ngIf="results">
+    <h3>Results</h3>
+    <pre>{{ results | json }}</pre>
+  </div>
+
+  <!-- Error Section -->
+  <div class="error-section" *ngIf="error">
+    <p class="error">{{ error }}</p>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div class="loading-section" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Processing...</p>
+  </div>
+</div> 
