@@ -1,9 +1,14 @@
 <div class="context-extraction">
   <h3>Context Extraction</h3>
-  <p>Extracted fields for incident analysis:</p>
-  <ul>
-    <li>Connectivity: Stable</li>
-    <li>Upstream Dependency: Service A</li>
-    <li>Downstream Dependency: Service B</li>
-  </ul>
+  <textarea [(ngModel)]="incidentDescription" placeholder="Enter incident description..."></textarea>
+  <button (click)="extractContext()">Extract Context</button>
+  <div *ngIf="context">
+    <h4>Extracted Context:</h4>
+    <p><strong>Summary:</strong> {{ context.summary }}</p>
+    <ul>
+      <li>Connectivity: {{ context.connectivity }}</li>
+      <li>Upstream Dependency: {{ context.upstream }}</li>
+      <li>Downstream Dependency: {{ context.downstream }}</li>
+    </ul>
+  </div>
 </div>

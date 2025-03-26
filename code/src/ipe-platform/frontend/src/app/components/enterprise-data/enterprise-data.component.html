@@ -1,9 +1,15 @@
 <div class="enterprise-data">
   <h3>Enterprise Data Integration</h3>
-  <p>Mock enterprise data integration (MCP-based).</p>
-  <ul>
-    <li>Data Source: Wells Fargo API</li>
-    <li>Status: Connected</li>
-    <li>Last Sync: 2025-03-26 09:00 AM</li>
-  </ul>
+  <div *ngIf="enterpriseData; else loading">
+    <p>Summary of enterprise data integration (MCP-based):</p>
+    <ul>
+      <li>Total Data Sources: {{ enterpriseData.total_sources }}</li>
+      <li>Connected Sources: {{ enterpriseData.connected_sources }}</li>
+      <li>Disconnected Sources: {{ enterpriseData.disconnected_sources }}</li>
+      <li>Latest Sync: {{ enterpriseData.latest_sync }}</li>
+    </ul>
+  </div>
+  <ng-template #loading>
+    <p>Loading enterprise data...</p>
+  </ng-template>
 </div>

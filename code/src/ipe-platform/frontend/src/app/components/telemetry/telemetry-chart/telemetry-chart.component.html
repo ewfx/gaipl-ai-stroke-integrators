@@ -1,8 +1,18 @@
 <div class="chart">
-  <h4>Telemetry Chart (Mock)</h4>
-  <div class="mock-chart">
-    <div class="bar" style="width: 60%; background-color: #3498db;">CPU Usage: 60%</div>
-    <div class="bar" style="width: 40%; background-color: #2ecc71;">Memory Usage: 40%</div>
-    <div class="bar" style="width: 80%; background-color: #e74c3c;">Network Latency: 80ms</div>
+  <h4>Telemetry Insights</h4>
+  <div class="mock-chart" *ngIf="telemetryData">
+    <div class="bar" [style.width]="telemetryData.avg_cpu_usage + '%'" style="background-color: #3498db;">
+      CPU Usage: {{ telemetryData.avg_cpu_usage | number:'1.0-1' }}%
+    </div>
+    <div class="bar" [style.width]="telemetryData.avg_memory_usage + '%'" style="background-color: #2ecc71;">
+      Memory Usage: {{ telemetryData.avg_memory_usage | number:'1.0-1' }}%
+    </div>
+    <div class="bar" [style.width]="telemetryData.avg_network_latency / 2 + '%'" style="background-color: #e74c3c;">
+      Network Latency: {{ telemetryData.avg_network_latency | number:'1.0-1' }}ms
+    </div>
+    <div class="bar" [style.width]="telemetryData.incident_probability * 100 + '%'" style="background-color: #e67e22;">
+      Incident Probability: {{ telemetryData.incident_probability * 100 | number:'1.0-1' }}%
+    </div>
   </div>
+  <p *ngIf="!telemetryData">Loading telemetry data...</p>
 </div>
