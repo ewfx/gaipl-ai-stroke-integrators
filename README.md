@@ -176,23 +176,48 @@ By tackling these challenges head-on, we built an AI-driven IPE that is scalable
 
 ## 🏃 How to Run
 1. Clone the repository  
-   ```sh
-   git clone https://github.com/your-repo.git
-   ```
-2. Install dependencies  
-   ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
-   ```
+   git clone https://github.com/your-username/ipe-platform.git
+   
+2. Install dependencies
+   
+   Backend
+   
+   cd backend
+   npm install
+   python -m venv venv
+   # On Windows
+   venv\Scripts\activate
+   # On Unix-based systems (Linux/Mac)
+   source venv/bin/activate
+   pip install pandas scikit-learn
+
+   Frontend
+
+   cd ../frontend
+   npm install
+   
 3. Run the project  
-   ```sh
-   npm start  # or python app.py
-   ```
+   
+   Backend
+
+   cd backend
+   # Ensure the virtual environment is activated
+   node src/server.js
+
+   Frontend
+
+   cd frontend
+   ng serve
+
+   Open your browser and navigate to http://localhost:4200 to access the application
 
 ## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+- **Frontend**: Angular 18, TypeScript, HTML, CSS
+- **Backend**: Node.js, Express.js, Python (Pandas, Scikit-learn)
+- **APIs**: Gemini API (chatbot), Hugging Face (context extraction)
+- **Custom Memory**: A `Map`-based implementation for conversation history (replacing LangChain’s memory classes)
+
+## Prerequisites
 
 ## 👥 Team
 - **Your Name** - [GitHub](#) | [LinkedIn](#)
