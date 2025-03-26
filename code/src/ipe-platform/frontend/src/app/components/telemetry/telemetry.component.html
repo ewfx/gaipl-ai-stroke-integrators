@@ -1,0 +1,6 @@
+<div class="telemetry">
+  <h3>Telemetry Data</h3>
+  <app-telemetry-chart></app-telemetry-chart>
+  <button (click)="openDialog()">View Details</button>
+  <app-telemetry-dialog *ngIf="showDialog" (close)="closeDialog()"></app-telemetry-dialog>
+</div>

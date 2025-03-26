@@ -1,0 +1,9 @@
+<div class="chatbot">
+  <h3>Ask the AI Chatbot</h3>
+  <textarea [(ngModel)]="prompt" placeholder="Enter your query (e.g., 'How do I resolve a platform incident?')"></textarea>
+  <button (click)="sendMessage()">Send</button>
+  <div class="response" *ngIf="response">
+    <h4>Response:</h4>
+    <p>{{ response }}</p>
+  </div>
+</div>

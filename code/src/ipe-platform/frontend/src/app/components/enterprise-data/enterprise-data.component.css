@@ -1,0 +1,25 @@
+.enterprise-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  h3 {
+    color: #e67e22;
+    font-size: 20px;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  ul li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+  }

@@ -1,0 +1,10 @@
+.telemetry {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  h3 {
+    color: #2ecc71;
+    font-size: 20px;
+  }
