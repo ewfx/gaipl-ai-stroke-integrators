@@ -97,46 +97,25 @@ This Gen-AI-powered IPE is designed to revolutionize how platform support teams 
 Our Gen-AI Enabled Integrated Platform Environment (IPE) leverages a modern, scalable tech stack that integrates AI, automation, and enterprise data sources for seamless platform support.
 
 🔹 Frontend (User Interface)
-Framework: React.js (for a dynamic and interactive UI)
+Framework: Angular (for a dynamic and interactive UI)
 
-Styling: Tailwind CSS (for a responsive, modern design)
+Styling: CSS (for a responsive, modern design)
 
 State Management: Redux / Context API (for efficient data handling)
 
 🔹 Backend (API & Business Logic)
-Frameworks: FastAPI / Flask (for building high-performance APIs in Python)
+Frameworks: Node.js , Python , Express (for building high-performance APIs in Python)
 
 Task Processing: Celery / AsyncIO (for handling background tasks efficiently)
 
 Authentication & Security: OAuth2, JWT (for secure access control)
 
 🔹 AI & Machine Learning
-LLMs & NLP: OpenAI API, Hugging Face Transformers (for AI chatbot and natural language processing)
+LLMs & NLP: Gemini 3.5 API, Hugging Face Transformers (for AI chatbot and natural language processing)
 
 Knowledge Retrieval: LangChain (for context-aware enterprise data extraction)
 
 Recommendation Engine: Scikit-learn, TensorFlow / PyTorch (for telemetry-based incident suggestions)
-
-🔹 Automation & Orchestration
-Infrastructure as Code: Ansible (for automated incident resolution and health checks)
-
-Scripting: Python (for automation workflows and integrations)
-
-Job Scheduling: Apache Airflow / Cron (for scheduled tasks and reports)
-
-🔹 Databases & Storage
-Primary Database: PostgreSQL (for structured data storage)
-
-Search & Logs: Elasticsearch, Splunk (for log analysis and incident correlation)
-
-Caching: Redis (for faster response times)
-
-🔹 Enterprise Integrations & Observability
-Model Context Protocol (MCP): For connecting with enterprise data sources
-
-ITSM Tools: ServiceNow, JIRA (for incident tracking and workflow automation)
-
-Observability Platforms: Prometheus, Datadog, Grafana (for telemetry and monitoring)
 
 🔹 Deployment & Scalability
 Containerization: Docker (for consistent deployment)
