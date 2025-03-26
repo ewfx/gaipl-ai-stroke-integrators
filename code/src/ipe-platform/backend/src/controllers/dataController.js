@@ -1,21 +1,23 @@
-const { processTelemetryData, processEnterpriseData } = require('../services/dataService');
+const dataService = require('../services/dataService');
 
-const getTelemetryData = async (req, res) => {
-  try {
-    const data = await processTelemetryData();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+class DataController {
+  async getTelemetryData(req, res) {
+    try {
+      const data = await dataService.getTelemetryData();
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
-};
 
-const getEnterpriseData = async (req, res) => {
-  try {
-    const data = await processEnterpriseData();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  async getEnterpriseData(req, res) {
+    try {
+      const data = await dataService.getEnterpriseData();
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
-};
+}
 
-module.exports = { getTelemetryData, getEnterpriseData };
+module.exports = new DataController();

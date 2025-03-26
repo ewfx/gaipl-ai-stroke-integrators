@@ -1,102 +1,125 @@
 const { PythonShell } = require('python-shell');
 const path = require('path');
+const fs = require('fs');
 
-const processTelemetryData = async () => {
-  return new Promise((resolve, reject) => {
-    const options = {
-      args: ['telemetry'],
-      pythonPath: process.env.PYTHON_PATH || 'python',
-      pythonOptions: ['-u'],
-      scriptPath: path.join(__dirname, '..') // Point to the src directory
-    };
+class DataService {
+  async getTelemetryData() {
+    return new Promise((resolve, reject) => {
+      const scriptPath = path.join(__dirname, '..');
+      const scriptFullPath = path.join(scriptPath, 'dataProcessor.py');
 
-    // Create a PythonShell instance
-    const shell = new PythonShell('dataProcessor.py', options);
+      console.log('Debug: __dirname:', __dirname);
+      console.log('Debug: scriptPath for telemetry:', scriptPath);
+      console.log('Debug: scriptFullPath for telemetry:', scriptFullPath);
 
-    let output = '';
-
-    // Collect script output
-    shell.on('message', (message) => {
-      output += message;
-    });
-
-    // Handle script errors
-    shell.on('error', (err) => {
-      console.error('Error running dataProcessor.py for telemetry:', err);
-      reject(err);
-    });
-
-    // Handle script completion
-    shell.on('close', () => {
-      try {
-        console.log('Telemetry script output:', output);
-        const result = JSON.parse(output);
-        if (result.error) {
-          reject(new Error(result.error));
-        } else {
-          resolve(result);
-        }
-      } catch (parseErr) {
-        console.error('Error parsing dataProcessor.py output for telemetry:', parseErr);
-        reject(parseErr);
+      if (!fs.existsSync(scriptFullPath)) {
+        reject(new Error(`dataProcessor.py not found at ${scriptFullPath}`));
+        return;
       }
-    });
 
-    // Add a timeout of 10 seconds
-    setTimeout(() => {
-      shell.terminate(); // This will now work
-      reject(new Error('Telemetry data processing timed out after 10 seconds'));
-    }, 10000);
-  });
-};
+      const options = {
+        mode: 'text',
+        pythonPath: process.env.PYTHON_PATH,
+        scriptPath: scriptPath,
+        args: ['telemetry'],
+      };
 
-const processEnterpriseData = async () => {
-  return new Promise((resolve, reject) => {
-    const options = {
-      args: ['enterprise'],
-      pythonPath: process.env.PYTHON_PATH || 'python',
-      pythonOptions: ['-u'],
-      scriptPath: path.join(__dirname, '..') // Point to the src directory
-    };
+      console.log('Debug: Python options:', options);
 
-    // Create a PythonShell instance
-    const shell = new PythonShell('dataProcessor.py', options);
+      const shell = new PythonShell('dataProcessor.py', options);
 
-    let output = '';
+      let output = '';
+      shell.on('message', (message) => {
+        console.log('Debug: Python stdout:', message);
+        output += message + '\n';
+      });
 
-    // Collect script output
-    shell.on('message', (message) => {
-      output += message;
-    });
+      shell.on('stderr', (stderr) => {
+        console.log('Debug: Python stderr:', stderr);
+      });
 
-    // Handle script errors
-    shell.on('error', (err) => {
-      console.error('Error running dataProcessor.py for enterprise:', err);
-      reject(err);
-    });
+      shell.on('error', (err) => {
+        console.log('Debug: Python error:', err);
+        reject(new Error(`Python script error: ${err.message}`));
+      });
 
-    // Handle script completion
-    shell.on('close', () => {
-      try {
-        console.log('Enterprise script output:', output);
-        const result = JSON.parse(output);
-        if (result.error) {
-          reject(new Error(result.error));
-        } else {
-          resolve(result);
+      shell.on('close', () => {
+        console.log('Debug: Python script closed, raw output:', output);
+        try {
+          if (!output.trim()) {
+            reject(new Error('No output received from dataProcessor.py for telemetry'));
+          }
+          const result = JSON.parse(output.trim());
+          if (result.error) {
+            reject(new Error(result.error));
+          } else {
+            resolve(result);
+          }
+        } catch (err) {
+          reject(new Error(`Error parsing dataProcessor.py output for telemetry: ${err.message}`));
         }
-      } catch (parseErr) {
-        console.error('Error parsing dataProcessor.py output for enterprise:', parseErr);
-        reject(parseErr);
-      }
+      });
     });
+  }
 
-    // Add a timeout of 10 seconds
-    setTimeout(() => {
-      shell.terminate(); // This will now work
-      reject(new Error('Enterprise data processing timed out after 10 seconds'));
-    }, 10000);
-  });
-};
+  async getEnterpriseData() {
+    return new Promise((resolve, reject) => {
+      const scriptPath = path.join(__dirname, '..');
+      const scriptFullPath = path.join(scriptPath, 'dataProcessor.py');
 
-module.exports = { processTelemetryData, processEnterpriseData };
+      console.log('Debug: __dirname:', __dirname);
+      console.log('Debug: scriptPath for enterprise:', scriptPath);
+      console.log('Debug: scriptFullPath for enterprise:', scriptFullPath);
+
+      if (!fs.existsSync(scriptFullPath)) {
+        reject(new Error(`dataProcessor.py not found at ${scriptFullPath}`));
+        return;
+      }
+
+      const options = {
+        mode: 'text',
+        pythonPath: process.env.PYTHON_PATH,
+        scriptPath: scriptPath,
+        args: ['enterprise'],
+      };
+
+      console.log('Debug: Python options:', options);
+
+      const shell = new PythonShell('dataProcessor.py', options);
+
+      let output = '';
+      shell.on('message', (message) => {
+        console.log('Debug: Python stdout:', message);
+        output += message + '\n';
+      });
+
+      shell.on('stderr', (stderr) => {
+        console.log('Debug: Python stderr:', stderr);
+      });
+
+      shell.on('error', (err) => {
+        console.log('Debug: Python error:', err);
+        reject(new Error(`Python script error: ${err.message}`));
+      });
+
+      shell.on('close', () => {
+        console.log('Debug: Python script closed, raw output:', output);
+        try {
+          if (!output.trim()) {
+            reject(new Error('No output received from dataProcessor.py for enterprise'));
+          }
+          const result = JSON.parse(output.trim());
+          if (result.error) {
+            reject(new Error(result.error));
+          } else {
+            resolve(result);
+          }
+        } catch (err) {
+          reject(new Error(`Error parsing dataProcessor.py output for enterprise: ${err.message}`));
+        }
+      });
+    });
+  }
+}
+
+module.exports = new DataService();

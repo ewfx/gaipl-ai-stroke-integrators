@@ -2,9 +2,31 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #f8fafc;
   }
   
   main {
     flex: 1;
-    padding: 20px;
+    padding: 2rem 1rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Ensure proper spacing between components */
+  app-header {
+    display: block;
+    width: 100%;
+  }
+
+  app-footer {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
   }

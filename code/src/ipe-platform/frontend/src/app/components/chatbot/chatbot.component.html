@@ -1,11 +1,24 @@
-<div class="chatbot">
-  <h3>Ask the AI Chatbot</h3>
-  <div class="conversation">
-    <div *ngFor="let message of conversation" [ngClass]="message.role">
-      <strong>{{ message.role === 'user' ? 'You' : 'AI' }}:</strong>
-      <p>{{ message.content }}</p>
+<div class="chatbot-container">
+  <h2 class="chatbot-title">AI Chatbot</h2>
+  <div class="chat-history" #chatHistory>
+    <div *ngFor="let message of messages" [ngClass]="message.sender === 'user' ? 'user-message' : 'ai-message'">
+      <span class="sender">{{ message.sender === 'user' ? 'You' : 'AI' }}:</span>
+      <span class="message-content">{{ message.content }}</span>
     </div>
   </div>
-  <textarea [(ngModel)]="prompt" placeholder="Enter your query (e.g., 'How do I resolve a platform incident?')"></textarea>
-  <button (click)="sendMessage()">Send</button>
+  <div class="chat-input">
+    <input
+      type="text"
+      [(ngModel)]="userMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Type your message (e.g., 'Resolve incident')"
+      class="message-input"
+    />
+    <button (click)="sendMessage()" class="send-button">
+      <span>Send</span>
+      <svg class="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+      </svg>
+    </button>
+  </div>
 </div>

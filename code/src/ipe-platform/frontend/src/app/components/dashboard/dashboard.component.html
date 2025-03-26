@@ -1,24 +1,36 @@
-<div class="dashboard">
+<div class="dashboard" role="main">
   <header class="dashboard-header">
     <h1>Integrated Platform Environment (IPE)</h1>
     <p>Monitor, troubleshoot, and manage your platform with AI-powered tools.</p>
   </header>
-  <section class="dashboard-grid">
-    <div class="card" id="chatbot">
-      <h2>AI Chatbot</h2>
-      <app-chatbot></app-chatbot>
-    </div>
-    <div class="card" id="telemetry">
-      <h2>Telemetry Insights</h2>
-      <app-telemetry></app-telemetry>
-    </div>
-    <div class="card" id="enterprise-data">
-      <h2>Enterprise Data</h2>
-      <app-enterprise-data></app-enterprise-data>
-    </div>
-    <div class="card" id="context-extraction">
-      <h2>Context Extraction</h2>
-      <app-context-extraction></app-context-extraction>
-    </div>
+  
+  <section class="dashboard-grid" aria-label="Platform features">
+    <article class="card" id="chatbot" role="region" aria-labelledby="chatbot-title">
+      <h2 id="chatbot-title">AI Chatbot</h2>
+      <div class="card-content">
+        <app-chatbot></app-chatbot>
+      </div>
+    </article>
+
+    <article class="card" id="telemetry" role="region" aria-labelledby="telemetry-title">
+      <h2 id="telemetry-title">Telemetry Insights</h2>
+      <div class="card-content">
+        <app-telemetry></app-telemetry>
+      </div>
+    </article>
+
+    <article class="card" id="enterprise-data" role="region" aria-labelledby="enterprise-data-title">
+      <h2 id="enterprise-data-title">Enterprise Data</h2>
+      <div class="card-content">
+        <app-enterprise-data></app-enterprise-data>
+      </div>
+    </article>
+
+    <article class="card" id="context-extraction" role="region" aria-labelledby="context-extraction-title">
+      <h2 id="context-extraction-title">Context Extraction</h2>
+      <div class="card-content">
+        <app-context-extraction></app-context-extraction>
+      </div>
+    </article>
   </section>
 </div>
